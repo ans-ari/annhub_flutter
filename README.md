@@ -76,6 +76,7 @@ dependency_overrides:
 
 ## Package setup
 
+### Use the package as is
 1. Add these code to your main.dart import section
    ```dart
    import 'package:annhub_flutter/annhub_flutter.dart' as annhub_flutter;
@@ -88,8 +89,54 @@ dependency_overrides:
       _configureDependencies();
       runApp(const MyApp());
    }
+
+   void _configureDependencies() async {
+      annhub_flutter.configureDependencies();
+      iris_ui.configureDependencies();
+   }
    ```
 
+### Override package env configuration
+
+1. Open your root project pubspec.yaml these dependencies to dependencies section
+   ```yaml
+   injectable: ^1.5.0
+   envify: ^2.0.2
+   ```
+2. Add the following dependencies to your dev_dependencies
+   ```yaml
+   build_runner: ^2.1.1
+   envify_generator: ^2.0.2
+   injectable_generator: ^1.5.0
+  ```
+3. Add these code to your main.dart import section
+   ```dart
+      import 'package:injectable/injectable.dart';
+      import 'package:annhub_flutter/annhub_flutter.dart' as annhub_flutter;
+      import 'package:get_it/get_it.dart';
+      import 'main.config.dart';
+   ```
+4. Replace your main function with the code below
+   ```dart
+   Future<void> main() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      configLoading();
+      _configureDependencies();
+      runApp(const MyApp());
+   }
+
+   final sl = GetIt.instance;
+
+   @injectableInit
+   void configureDependencies() => $initGetIt(GetIt.instance);
+
+   void _configureDependencies() async {
+      sl.allowReassignment = true;
+      annhub_flutter.configureDependencies();
+      configureDependencies();// This function must be called before $initGetIt(sl).
+      $initGetIt(sl);// This function must be called last.
+   }
+   ```
 ## Package Usage
 
 * **Get iris species prediction**
@@ -105,10 +152,10 @@ dependency_overrides:
 
 
 <!-- Links -->
-[install.sh]: https://github.com/ans-ari/annhub_flutter/blob/master/resources/install.sh
-[install.bat]: https://github.com/ans-ari/annhub_flutter/blob/master/resources/install.bat
+[install.sh]: resources/install.sh
+[install.bat]: resources/install.bat
+[libtask_text_jni.so]: resources/libtask_text_jni.so
 [`TensorFlowLiteC.framework`]: https://github.com/ans-ari/annhub_flutter/releases/download/v0.0.1/TensorFlowLiteC.framework.zip
-[libtask_text_jni.so]: https://github.com/ans-ari/annhub_flutter/blob/master/resources/libtask_text_jni.so
 [(ref)]: https://dart.dev/tools/pub/cmd/pub-get#the-system-package-cache
 [instructions in wiki]: https://github.com/am15h/tflite_flutter_plugin/wiki/
 
