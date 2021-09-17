@@ -56,9 +56,8 @@ These scripts install pre-built binaries based on latest stable tensorflow relea
 
 
 ## Package installation
-1. Clone the repo to your machine
 
-2. Open your pubspec.yaml and add the code below to your dependency
+1. Open your pubspec.yaml and add the code below to your dependency
 
 ```yaml
 dartz: ^0.10.0
@@ -68,7 +67,7 @@ annhub_flutter:
       ref: main 
       path: packages/annhub_flutter
 ```
-3. Also add these dependencies override to your pubspec
+2. Also add these dependencies override to your pubspec
 ```yaml
 dependency_overrides:
   analyzer: ^2.1.0
