@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:injectable/injectable.dart';
 import 'package:iris_ui/iris_ui.dart' as iris_ui;
 import 'package:annhub_flutter/annhub_flutter.dart' as annhub_flutter;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:get_it/get_it.dart';
+
+import 'main.config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,9 +28,16 @@ void configLoading() {
     ..userInteractions = false;
 }
 
+final sl = GetIt.instance;
+@injectableInit
+void configureDependencies() => $initGetIt(GetIt.instance);
+
 void _configureDependencies() async {
+  sl.allowReassignment = true;
   annhub_flutter.configureDependencies();
   iris_ui.configureDependencies();
+  configureDependencies();
+  $initGetIt(sl);
 }
 
 class MyApp extends StatelessWidget {

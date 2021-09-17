@@ -1,5 +1,4 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:core/config.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,10 +11,11 @@ abstract class NetworkingModule {
   @preResolve
   Future<DioClient> getDioClient(
     RetryOnConnectionChangeInterceptor retryOnConnectionChangeInterceptor,
+    @Named('baseUrl') baseUrl,
   ) async =>
       DioClient(
         dio,
-        baseUrl: Env.baseUrl,
+        baseUrl: baseUrl,
         interceptors: [
           retryOnConnectionChangeInterceptor,
         ],

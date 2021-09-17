@@ -8,7 +8,7 @@ const _defaultReceiveTimeout = Duration.millisecondsPerMinute;
 
 class DioClient {
   final Dio _dio;
-
+  Dio? dio;
   DioClient(
     Dio dio, {
     required String baseUrl,
@@ -176,13 +176,13 @@ class DioClient {
     required RequestOptions requestOptions,
   }) async {
     try {
-      final dio = Dio();
-      final response = await dio.fetch(requestOptions).catchError(
+      dio ??= _dio.copyWith();
+      final response = await dio?.fetch(requestOptions).catchError(
         (error) {
           throw NetworkExceptions.getDioException(error);
         },
       );
-      return response.data;
+      return response?.data;
     } catch (error) {
       if (error is DioError) {
         throw NetworkExceptions.getDioException(error);
@@ -190,6 +190,12 @@ class DioClient {
         throw Exception(error);
       }
     }
+  }
+}
+
+extension DioExtensions on Dio {
+  Dio copyWith() {
+    return this;
   }
 }
 

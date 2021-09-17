@@ -20,11 +20,12 @@ export 'package:annhub_flutter_domain/data.dart';
 export 'package:networking/mapper.dart';
 export 'package:networking/request_data.dart';
 export 'package:networking/response_data.dart';
+export 'package:core/config.dart';
 
 void configureDependencies() async {
+  core.configureDependencies();
   networking.configureDependencies();
   annhub_flutter_interactors.configureDependencies();
   annhub_flutter_data_sources.configureDependencies();
-  core.configureDependencies();
   cache.configureDependencies();
 }

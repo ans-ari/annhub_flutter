@@ -12,17 +12,17 @@ dependencies:
     sdk: flutter
   injectable: ^1.5.0
   # core: 
-  #   path: ./lib/src/core
+  #   path: ../core
   # cache:
-  #   path: ./lib/src/infrastructure/cache
+  #   path: ../infrastructure/cache
   # networking:
-  #   path: ./lib/src/infrastructure/networking
+  #   path: ../infrastructure/networking
   # annhub_flutter_data_sources:
-  #   path: ./lib/src/annhub_flutter_data_sources
+  #   path: ../annhub_flutter_data_sources
   # annhub_flutter_interactors:
-  #   path: ./lib/src/annhub_flutter_interactors
+  #   path: ../annhub_flutter_interactors
   # annhub_flutter_domain:
-  #   path: ./lib/src/annhub_flutter_domain
+  #   path: ../annhub_flutter_domain
 
   core:
     git:

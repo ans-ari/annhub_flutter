@@ -27,6 +27,7 @@ dependencies:
   rxdart: ^0.27.1
   url_launcher: ^6.0.9
   annhub_flutter:
+    # path: ../../packages/annhub_flutter
     git:
       url: git@github.com:ans-ari/annhub_flutter.git
       ref: main 

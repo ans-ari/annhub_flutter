@@ -37,8 +37,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       _i8.RetryOnConnectionChangeInterceptor(
           requestRetrier: get<_i5.DioConnectivityRequestRetrier>()));
   await gh.singletonAsync<_i9.DioClient>(
-      () => networkingModule
-          .getDioClient(get<_i8.RetryOnConnectionChangeInterceptor>()),
+      () => networkingModule.getDioClient(
+          get<_i8.RetryOnConnectionChangeInterceptor>(),
+          get<dynamic>(instanceName: 'baseUrl')),
       dependsOn: [_i8.RetryOnConnectionChangeInterceptor],
       preResolve: true);
   return get;

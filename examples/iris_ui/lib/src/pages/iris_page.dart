@@ -35,12 +35,12 @@ class _IrisPageState extends State<IrisPage> {
         listener: (context, state) {
           state.maybeWhen(
             orElse: () {
-              EasyLoading.dismiss();
+              // EasyLoading.dismiss();
               return _irisSpecies = '';
             },
-            loading: () => EasyLoading.show(status: 'loading'),
+            // loading: () => EasyLoading.show(status: 'loading'),
             loaded: (data) {
-              EasyLoading.dismiss();
+              // EasyLoading.dismiss();
               return _irisSpecies = data;
             },
           );
