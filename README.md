@@ -63,7 +63,10 @@ These scripts install pre-built binaries based on latest stable tensorflow relea
 ```yaml
 dartz: ^0.10.0
 annhub_flutter:
-   path: path/to/package
+   git:
+      url: git@github.com:ans-ari/annhub_flutter.git
+      ref: main 
+      path: packages/annhub_flutter
 ```
 3. Also add these dependencies override to your pubspec
 ```yaml
