@@ -105,12 +105,12 @@ dependency_overrides:
 
 
 <!-- Links -->
-[install.sh]: (https://github.com/PttB422/annhub-flutter/blob/master/resources/install.sh)
-[install.bat]: (https://github.com/PttB422/annhub-flutter/blob/master/resources/install.bat)
-[`TensorFlowLiteC.framework`]: (https://github.com/PttB422/annhub-flutter/releases/download/v0.0.1/TensorFlowLiteC.framework.zip)
-[libtask_text_jni.so]: (https://github.com/PttB422/annhub-flutter/blob/master/resources/libtask_text_jni.so)
-[(ref)]: (https://dart.dev/tools/pub/cmd/pub-get#the-system-package-cache)
-[instructions in wiki]: (https://github.com/am15h/tflite_flutter_plugin/wiki/)
+[install.sh]: https://github.com/ans-ari/annhub_flutter/blob/master/resources/install.sh
+[install.bat]: https://github.com/ans-ari/annhub_flutter/blob/master/resources/install.bat
+[`TensorFlowLiteC.framework`]: https://github.com/ans-ari/annhub_flutter/releases/download/v0.0.1/TensorFlowLiteC.framework.zip
+[libtask_text_jni.so]: https://github.com/ans-ari/annhub_flutter/blob/master/resources/libtask_text_jni.so
+[(ref)]: https://dart.dev/tools/pub/cmd/pub-get#the-system-package-cache
+[instructions in wiki]: https://github.com/am15h/tflite_flutter_plugin/wiki/
 
 <!-- Images -->
 [android_aapt_options]: docs/android_aapt_options.png "Android AATP Options"
