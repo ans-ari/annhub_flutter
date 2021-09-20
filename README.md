@@ -108,15 +108,33 @@ dependency_overrides:
    build_runner: ^2.1.1
    envify_generator: ^2.0.2
    injectable_generator: ^1.5.0
-  ```
-3. Add these code to your main.dart import section
+   ```
+3. Create .env and env.dart files
+   ```
+   BASE_URL = "https://some.baseurl123.com"
+   ```
+   ```dart
+   import 'package:envify/envify.dart';
+   import 'package:flutter/foundation.dart';
+
+   part 'env.g.dart';
+
+   const _envDir = 'lib/src/config/env/';
+
+   @Envify(
+      path: kReleaseMode ? '$_envDir.env.production' : '$_envDir.env.development')
+   abstract class Env {
+      static const baseUrl = _Env.baseUrl;
+   }
+   ```
+4. Add these code to your main.dart import section
    ```dart
       import 'package:injectable/injectable.dart';
       import 'package:annhub_flutter/annhub_flutter.dart' as annhub_flutter;
       import 'package:get_it/get_it.dart';
       import 'main.config.dart';
    ```
-4. Replace your main function with the code below
+5. Replace your main function with the code below
    ```dart
    Future<void> main() async {
       WidgetsFlutterBinding.ensureInitialized();
@@ -136,6 +154,11 @@ dependency_overrides:
       configureDependencies();// This function must be called before $initGetIt(sl).
       $initGetIt(sl);// This function must be called last.
    }
+   ```
+6. Run command in root project terminal
+   ```
+   flutter pub run build_runner build --delete-conflicting-outputs
+
    ```
 ## Package Usage
 
