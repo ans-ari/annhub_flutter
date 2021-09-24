@@ -20,41 +20,29 @@ class IrisBloc extends Bloc<IrisEvent, IrisState> {
 
   IrisBloc({required RequestIrisUseCase requestIrisUseCase})
       : _requestIrisUseCase = requestIrisUseCase,
-        super(const BaseState.initial());
+        super(const BaseState.initial()) {
+    on<_GetIrisPrediction>(_mapGetIrisPredictionEvent);
+  }
 
-  @override
-  Stream<IrisState> mapEventToState(
-    IrisEvent event,
-  ) =>
-      event
-          .map(
-        getIrisPrediction: _mapGetIrisPredictionEventToState,
-      )
-          .handleError((error) async* {
-        yield const BaseState.error(failure: Failure.unexpected());
-      });
-
-  Stream<IrisState> _mapGetIrisPredictionEventToState(
-      _GetIrisPrediction event) async* {
-    yield const BaseState.loading();
-
-    final failureOrSignIn = await _requestIrisUseCase(
+  FutureOr<void> _mapGetIrisPredictionEvent(
+      _GetIrisPrediction event, Emitter<BaseState<String>> emit) async {
+    emit(const BaseState.loading());
+    final failureOrGotIris = await _requestIrisUseCase(
         FloraInfoParams(
           data: event.data,
         ),
         event.isCallARI);
-    yield* _eitherLoadedOrErrorState(failureOrSignIn);
+    emit(_eitherLoadedOrErrorState(failureOrGotIris));
   }
 
-  Stream<IrisState> _eitherLoadedOrErrorState(
+  IrisState _eitherLoadedOrErrorState(
     Either<Failure, String> either,
-  ) async* {
-    yield either.fold(
-      (failure) => BaseState.error(failure: failure),
-      (result) {
-        Logger().i("Get iris success!");
-        return BaseState.loaded(data: result);
-      },
-    );
-  }
+  ) =>
+      either.fold(
+        (failure) => BaseState.error(failure: failure),
+        (result) {
+          Logger().i("Get iris success!");
+          return BaseState.loaded(data: result);
+        },
+      );
 }
